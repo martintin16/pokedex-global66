@@ -12,7 +12,7 @@ defineEmits<{ openFilter: [] }>();
       <input
         v-model="model"
         type="text"
-        placeholder="Procurar Pókemon..."
+        placeholder="Buscar Pókemon..."
         class="w-full bg-transparent text-sm outline-none placeholder:text-gray-400"
       />
     </div>

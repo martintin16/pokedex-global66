@@ -34,7 +34,14 @@ async function share() {
     class="flex h-9 w-9 items-center justify-center rounded-full bg-white/30 text-white"
     @click="share"
   >
-    <span aria-hidden="true">{{ copied ? "✓" : "⇪" }}</span>
+    <Icon
+      :name="
+        copied
+          ? 'material-symbols:check-rounded'
+          : 'material-symbols:share-rounded'
+      "
+      class="h-5 w-5"
+    />
     <span class="sr-only">{{
       copied ? "Copiado al portapapeles" : "Compartir"
     }}</span>

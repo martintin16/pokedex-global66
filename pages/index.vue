@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: "blank" });
+
 onMounted(() => {
   setTimeout(() => {
     navigateTo("/onboarding");

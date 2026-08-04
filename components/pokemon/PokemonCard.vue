@@ -7,7 +7,8 @@ const props = defineProps<{
 
 defineEmits<{ toggleFavorite: [] }>();
 
-const { classes } = usePokemonType();
+const { classes, icon } = usePokemonType();
+const typesStore = useTypesStore();
 const { el, detail } = useLazyPokemonDetail(props.name);
 
 const primaryType = computed(() => detail.value?.types[0]);
@@ -16,6 +17,10 @@ const cardClasses = computed(() =>
     ? classes(primaryType.value)
     : { soft: "bg-gray-100", badge: "bg-gray-200" },
 );
+
+watchEffect(() => {
+  if (primaryType.value) typesStore.ensure(primaryType.value);
+});
 </script>
 
 <template>
@@ -26,10 +31,10 @@ const cardClasses = computed(() =>
       :class="cardClasses.soft"
     >
       <div class="z-10">
-        <p class="text-xs font-medium text-ink/60">
+        <p class="text-xs font-semibold text-muted">
           Nº{{ String(id).padStart(3, "0") }}
         </p>
-        <h3 class="text-lg font-bold capitalize text-ink">{{ name }}</h3>
+        <h3 class="text-xl font-semibold capitalize text-ink">{{ name }}</h3>
 
         <!-- Skeleton, revisar si cambio por pokeball -->
         <div v-if="!detail" class="mt-2 flex gap-2">
@@ -42,15 +47,17 @@ const cardClasses = computed(() =>
       </div>
 
       <div
-        class="absolute right-0 top-1/2 h-28 w-28 -translate-y-1/2 rounded-full opacity-60"
+        class="absolute right-0 top-1/2 flex h-28 w-28 -translate-y-1/2 items-center justify-center rounded-2xl p-2"
         :class="cardClasses.badge"
         aria-hidden="true"
-      />
+      >
+        <TypeShape v-if="primaryType" :type="primaryType" />
+      </div>
       <img
         v-if="detail"
         :src="detail.image"
         :alt="name"
-        class="relative z-10 h-20 w-20"
+        class="absolute right-6 top-1/2 z-10 h-16 w-16 -translate-y-1/2"
         loading="lazy"
       />
       <div
@@ -59,16 +66,20 @@ const cardClasses = computed(() =>
       />
 
       <button
-        class="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 shadow-sm"
+        class="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-favorite shadow-sm border-2 border-white"
         :aria-label="isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'"
         @click.prevent="$emit('toggleFavorite')"
       >
-        <span
+        <Icon
+          :name="
+            isFavorite
+              ? 'material-symbols:favorite-rounded'
+              : 'material-symbols:favorite-outline-rounded'
+          "
           class="h-4 w-4"
           :class="isFavorite ? 'text-red-500' : 'text-gray-300'"
           aria-hidden="true"
-          >♥</span
-        >
+        />
       </button>
     </NuxtLink>
   </div>

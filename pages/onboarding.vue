@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: "blank" });
+
 const step = ref(0);
 const steps = [
   {

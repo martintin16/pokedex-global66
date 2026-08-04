@@ -93,6 +93,10 @@ export function usePokemonApi() {
 
   function normalizeType(raw: PokemonTypeRaw): PokemonType {
     const esName = raw.names.find((n) => n.language.name === "es");
+    const iconUrl =
+      raw.sprites["generation-ix"]?.["scarlet-violet"]?.symbol_icon ??
+      raw.sprites["generation-viii"]?.["sword-shield"]?.symbol_icon ??
+      null;
     return {
       slug: raw.name,
       label: esName?.name ?? raw.name,
@@ -101,6 +105,7 @@ export function usePokemonApi() {
       ),
       halfDamageFrom: raw.damage_relations.half_damage_from.map((t) => t.name),
       noDamageFrom: raw.damage_relations.no_damage_from.map((t) => t.name),
+      iconUrl,
     };
   }
 

@@ -83,7 +83,9 @@ const genderPercents = computed(() => {
           class="relative z-10 flex w-full items-center justify-between px-4 mt-3"
         >
           <NuxtLink to="/list" aria-label="Volver" class="text-xl text-ink"
-            ><Icon name="material-symbols:chevron-left-rounded" class="h-6 w-6"
+            ><Icon
+              name="material-symbols:chevron-left-rounded"
+              class="h-6 w-6 text-white"
           /></NuxtLink>
           <div class="flex items-center gap-2">
             <ShareButton :pokemon="pokemon" />
@@ -140,43 +142,50 @@ const genderPercents = computed(() => {
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <p class="flex items-center gap-1 text-xs text-muted">
+            <p class="flex items-center gap-1 text-xs text-muted font-medium">
               <Icon name="material-symbols:weight-outline" class="h-4 w-4" />
               PESO
             </p>
             <div
               class="mt-1 rounded-2xl border border-gray-200 p-2 text-center"
             >
-              <p class="font-bold text-ink">{{ pokemon.weightKg }} kg</p>
+              <p class="text-lg font-bold text-ink">
+                {{ pokemon.weightKg }} kg
+              </p>
             </div>
           </div>
           <div>
-            <p class="flex items-center gap-1 text-xs text-muted">
+            <p class="flex items-center gap-1 text-xs text-muted font-medium">
               <Icon name="material-symbols:height-outline" class="h-4 w-4" />
               ALTURA
             </p>
             <div
               class="mt-1 rounded-2xl border border-gray-200 p-2 text-center"
             >
-              <p class="font-bold text-ink">{{ pokemon.heightM }} m</p>
+              <p class="text-lg font-bold text-ink">{{ pokemon.heightM }} m</p>
             </div>
           </div>
           <div>
-            <p class="flex items-center gap-1 text-xs text-muted">
+            <p class="flex items-center gap-1 text-xs text-muted font-medium">
               <Icon name="material-symbols:category-outline" class="h-4 w-4" />
               CATEGORÍA
             </p>
             <div
               class="mt-1 rounded-2xl border border-gray-200 p-2 text-center"
             >
-              <p class="font-bold uppercase text-ink">
+              <p class="text-lg font-bold uppercase text-ink">
                 {{ species?.genus || "—" }}
               </p>
             </div>
           </div>
           <div>
-            <p class="flex items-center gap-1 text-xs text-muted">
-              <Icon name="material-symbols:bolt-outline" class="h-4 w-4" />
+            <p class="flex items-center gap-1 text-xs text-muted font-medium">
+              <img
+                src="/nav-icons/habilidad.svg"
+                alt=""
+                class="h-4 w-4"
+                aria-hidden="true"
+              />
               HABILIDAD
             </p>
             <div
@@ -184,7 +193,7 @@ const genderPercents = computed(() => {
             >
               <AbilityLabel
                 v-if="pokemon.abilities[0]"
-                class="block font-bold uppercase text-ink"
+                class="block text-lg font-bold uppercase text-ink"
                 :slug="pokemon.abilities[0].slug"
               />
               <p v-else class="font-bold text-ink">—</p>
@@ -193,7 +202,7 @@ const genderPercents = computed(() => {
         </div>
 
         <div v-if="genderPercents" class="mt-5">
-          <p class="text-xs font-semibold text-muted">GÉNERO</p>
+          <p class="text-xs font-medium text-muted text-center">GÉNERO</p>
           <div class="mt-2 flex h-2 overflow-hidden rounded-pill bg-gray-100">
             <div
               class="bg-blue-400"

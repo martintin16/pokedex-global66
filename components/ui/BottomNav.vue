@@ -1,15 +1,4 @@
 <script setup lang="ts">
-const items = [
-  { label: "Pokedex", to: "/list", icon: "material-symbols:home-rounded" },
-  { label: "Regiones", to: "/regiones", icon: "material-symbols:public" },
-  {
-    label: "favoritos",
-    to: "/favoritos",
-    icon: "material-symbols:favorite-rounded",
-  },
-  { label: "Perfil", to: "/perfil", icon: "material-symbols:person-rounded" },
-];
-
 const route = useRoute();
 </script>
 
@@ -23,9 +12,6 @@ const route = useRoute();
       :key="item.to"
       :to="item.to"
       class="flex flex-col items-center gap-1 px-3 py-1 text-[11px]"
-      :class="
-        route.path === item.to ? 'text-primary font-semibold' : 'text-gray-400'
-      "
     >
       <img
         v-if="item.type === 'image'"
@@ -34,8 +20,21 @@ const route = useRoute();
         class="h-5 w-5"
         aria-hidden="true"
       />
-      <Icon v-else :name="item.icon!" class="h-5 w-5" aria-hidden="true" />
-      {{ item.label }}
+      <Icon
+        v-else
+        :name="item.icon!"
+        class="h-5 w-5 text-gray-400"
+        aria-hidden="true"
+      />
+      <span
+        :class="
+          route.path === item.to
+            ? 'text-primary font-semibold'
+            : 'text-gray-400'
+        "
+      >
+        {{ item.label }}
+      </span>
     </NuxtLink>
   </nav>
 </template>

@@ -109,11 +109,18 @@ export function usePokemonApi() {
     };
   }
 
-  /** Lista completa de tipos (solo slugs), usada por el filtro para
-   * saber qué existe sin hardcodear un array propio. */
+  // Lista completa de tipos (solo slugs), usada por el filtro para
+  // saber qué existe sin hardcodear un array propio.
+  // Se excluyen
+  // "shadow", "unknown" y "stellar": son metadatos técnicos de PokeAPI (Pokémon
+  // Sombra de Colosseum/XD y un placeholder), no tipos jugables reales
+  const NON_GAMEPLAY_TYPES = new Set(["shadow", "unknown", "stellar"]);
+
   async function fetchTypeList() {
     const res = await $pokeApi<TypeListResponse>("/type");
-    return res.results.map((t) => t.name);
+    return res.results
+      .map((t) => t.name)
+      .filter((slug) => !NON_GAMEPLAY_TYPES.has(slug));
   }
 
   // ---------- Habilidad (label localizado) ----------

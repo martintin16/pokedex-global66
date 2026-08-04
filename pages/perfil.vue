@@ -3,9 +3,9 @@ const favoritesStore = useFavoritesStore();
 </script>
 
 <template>
-  <div class="mx-auto flex min-h-screen max-w-md flex-col px-4 pb-24 pt-6">
-    <h1 class="text-lg font-bold text-ink">Perfil</h1>
-
+  <div
+    class="mx-auto flex justify-center min-h-screen max-w-md flex-col px-4 pb-24 pt-6"
+  >
     <div
       class="mt-6 flex flex-col items-center rounded-card border border-gray-100 p-6 text-center"
     >

@@ -1,4 +1,11 @@
 <script setup lang="ts">
+withDefaults(
+  defineProps<{
+    showFilter?: boolean;
+  }>(),
+  { showFilter: false },
+);
+
 const model = defineModel<string>({ default: "" });
 defineEmits<{ openFilter: [] }>();
 </script>
@@ -8,7 +15,11 @@ defineEmits<{ openFilter: [] }>();
     <div
       class="flex flex-1 items-center gap-2 rounded-pill border border-gray-200 px-4 py-2.5"
     >
-      <span class="text-gray-400" aria-hidden="true">⌕</span>
+      <Icon
+        name="material-symbols:search-rounded"
+        class="h-5 w-5 text-gray-400"
+        aria-hidden="true"
+      />
       <input
         v-model="model"
         type="text"
@@ -17,11 +28,16 @@ defineEmits<{ openFilter: [] }>();
       />
     </div>
     <button
-      class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500"
+      v-if="showFilter"
+      class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-500"
       aria-label="Filtrar"
       @click="$emit('openFilter')"
     >
-      ⌕
+      <Icon
+        name="material-symbols:tune-rounded"
+        class="h-5 w-5"
+        aria-hidden="true"
+      />
     </button>
   </div>
 </template>

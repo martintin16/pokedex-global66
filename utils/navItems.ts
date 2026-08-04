@@ -7,7 +7,12 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Pokédex", to: "/", type: "image", src: "/nav-icons/pokeball.svg" },
+  {
+    label: "Pokédex",
+    to: "/list",
+    type: "image",
+    src: "/nav-icons/pokeballGray.svg",
+  },
   {
     label: "Regiones",
     to: "/regiones",

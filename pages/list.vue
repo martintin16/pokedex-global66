@@ -47,7 +47,7 @@ function clearFilter() {
 
     <EmptyState
       v-if="pokemonStore.error"
-      image="/illustrations/magikarp-gray.png"
+      image="/illustrations/magikarp.png"
       title="Algo salió mal..."
       description="No pudimos cargar la información en este momento. Verifica tu conexión o intenta nuevamente más tarde."
       cta-label="Reintentar"

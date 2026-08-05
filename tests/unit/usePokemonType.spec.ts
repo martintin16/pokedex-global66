@@ -19,3 +19,36 @@ describe('usePokemonType (colores)', () => {
     expect(c.soft).toContain('bg-gray-100')
   })
 })
+
+describe('usePokemonType (icon/shape)', () => {
+  const { icon, shape } = usePokemonType()
+
+  it('icon() devuelve la ruta del svg del tipo', () => {
+    expect(icon('fire')).toBe('/type-icons/fire.svg')
+  })
+
+  it('icon() devuelve null para un tipo no mapeado', () => {
+    expect(icon('made-up-type')).toBeNull()
+  })
+
+  it('shape() usa el mismo svg que icon()', () => {
+    expect(shape('water')).toBe('/type-icons/water.svg')
+    expect(shape('made-up-type')).toBeNull()
+  })
+})
+
+describe('usePokemonType (gradient)', () => {
+  const { gradient } = usePokemonType()
+
+  it('arma un radial-gradient con los colores reales del tipo', () => {
+    expect(gradient('fire')).toBe(
+      'radial-gradient(circle at 35% 30%, #FFCC80, #FF9800)',
+    )
+  })
+
+  it('devuelve un gradiente gris de fallback para un tipo no mapeado', () => {
+    expect(gradient('made-up-type')).toBe(
+      'radial-gradient(circle, #E5E7EB, #D1D5DB)',
+    )
+  })
+})

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { NAV_ITEMS } from "~/utils/navItems";
+
 const route = useRoute();
 </script>
 

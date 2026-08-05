@@ -56,7 +56,7 @@ const genderPercents = computed(() => {
 
     <EmptyState
       v-else-if="error || !pokemon"
-      image="/illustrations/magikarp-gray.png"
+      image="/illustrations/magikarp.png"
       title="Algo salió mal..."
       description="No pudimos cargar la información de este pokémon."
       cta-label="Reintentar"

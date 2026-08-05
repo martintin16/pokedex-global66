@@ -1,10 +1,7 @@
-/**
- * Fuente única de los colores por tipo de Pokémon. `tailwind.config.ts`
- * los usa para generar las clases `bg-type-*`, y `usePokemonType.ts`
- * los usa para armar el degradado inline del componente TypeShape.
- * Un solo lugar para tocar si cambia una paleta — nunca dos copias del
- * mismo hex desincronizándose.
- */
+// Fuente única de los colores por tipo de Pokémon. `tailwind.config.ts`
+// los usa para generar las clases `bg-type-*`, y `usePokemonType.ts`
+// los usa para armar el degradado inline del componente TypeShape.
+// Un solo lugar para tocar si cambia una paleta
 export const TYPE_COLORS: Record<string, { DEFAULT: string; soft: string }> = {
   grass: { DEFAULT: "#63BC5A", soft: "#B1DEAC" },
   poison: { DEFAULT: "#B567CE", soft: "#DAB3E6" },

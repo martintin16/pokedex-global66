@@ -22,7 +22,6 @@ export const useTypesStore = defineStore("types", {
       return type;
     },
 
-    // Trae y cachea los 18 tipos de una
     async ensureAll() {
       const api = usePokemonApi();
       if (this.slugs.length === 0) {

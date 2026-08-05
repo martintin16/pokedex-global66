@@ -29,11 +29,6 @@ export interface PokemonDetailRaw {
     slot: number;
   }[];
 }
-
-/** Modelo normalizado que consume la UI. Los campos de texto (types,
- * abilities) quedan como slugs en inglés: el label localizado se
- * resuelve aparte (useTypesStore / useAbilitiesStore), nunca con una
- * tabla propia de traducción. */
 export interface Pokemon {
   id: number;
   name: string;
@@ -72,8 +67,6 @@ export interface PokemonTypeRaw {
     half_damage_from: { name: string; url: string }[];
     no_damage_from: { name: string; url: string }[];
   };
-  // Solo uso estas dos generaciones para el ícono de tipo,
-  // generaciones más viejas no lo traen.
   sprites: {
     "generation-viii"?: {
       "sword-shield"?: {
@@ -92,7 +85,7 @@ export interface PokemonTypeRaw {
 
 export interface PokemonType {
   slug: string;
-  label: string; // localizado si la API lo trae, si no, el slug original
+  label: string;
   doubleDamageFrom: string[];
   halfDamageFrom: string[];
   noDamageFrom: string[];

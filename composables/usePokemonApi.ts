@@ -11,14 +11,6 @@ import type {
   PokemonAbility,
 } from "~/types/pokemon";
 
-/**
- * Capa de acceso a PokeAPI. Habla con el cliente inyectado por
- * plugins/pokeapi.ts ($pokeApi). Ningún método de acá traduce nada a
- * mano: si la respuesta de la API trae español (campo `names` /
- * `genera` / `flavor_text_entries` filtrado por language "es"), se usa;
- * si no está, se devuelve el dato tal cual vino (idioma original), nunca
- * un valor inventado por una tabla propia.
- */
 export function usePokemonApi() {
   const { $pokeApi } = useNuxtApp();
 
@@ -77,9 +69,6 @@ export function usePokemonApi() {
       esFlavor?.flavor_text ?? raw.flavor_text_entries[0]?.flavor_text ?? "";
     return {
       genus,
-      // Los textos de PokeAPI traen \n y \f (form feed) como saltos de
-      // línea de la Pokédex original de los juegos; se limpian para un
-      // párrafo normal en la UI.
       description: rawFlavor.replace(/[\n\f\r]+/g, " ").trim(),
       genderRate: raw.gender_rate,
     };

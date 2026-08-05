@@ -11,20 +11,17 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {
-        // Azul primario: CTAs (Continuar, Empecemos, Reintentar, Aplicar)
-        // TODO: ajustar al hex exacto de Figma
         primary: {
           DEFAULT: "#3B82F6",
           hover: "#2563EB",
         },
-        ink: "#121212", // texto principal (títulos)
-        muted: "#424242", // texto secundario (descripciones)
+        ink: "#121212",
+        muted: "#424242",
         surface: "#FFFFFF",
-        app: "#F5F5F7", // fondo general de la app
+        app: "#F5F5F7",
         favorite: "#75757599",
         trash: "#CD3131",
 
-        // Colores por tipo de Pokémon: badge (pill) + fondo de card.
         type: TYPE_COLORS,
       },
       fontFamily: {

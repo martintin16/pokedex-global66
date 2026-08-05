@@ -20,8 +20,6 @@ const badges = [
   { label: "Tierra", type: "ground" },
 ];
 
-// Últimos 4 favoritos reales del usuario, para que esta pantalla no
-// quede 100% aislada del resto de la app.
 const recentFavorites = computed(() => favoritesStore.names.slice(0, 4));
 </script>
 
@@ -51,7 +49,6 @@ const recentFavorites = computed(() => favoritesStore.names.slice(0, 4));
       </p>
     </div>
 
-    <!-- Stats: medallas, capturados, favoritos (real) -->
     <div class="mt-4 grid grid-cols-3 gap-3">
       <div class="rounded-2xl border border-gray-200 p-3 text-center">
         <p class="text-xl font-bold text-ink">{{ badges.length }}</p>
@@ -67,7 +64,6 @@ const recentFavorites = computed(() => favoritesStore.names.slice(0, 4));
       </div>
     </div>
 
-    <!-- Medallas de gimnasio -->
     <div class="mt-6">
       <p class="text-sm font-bold text-ink">Medallas de Kanto</p>
       <div class="mt-2 flex flex-wrap gap-2">
@@ -86,7 +82,6 @@ const recentFavorites = computed(() => favoritesStore.names.slice(0, 4));
       </div>
     </div>
 
-    <!-- Mini lista de favoritos reales -->
     <div class="mt-6">
       <div class="flex items-center justify-between">
         <p class="text-sm font-bold text-ink">Mis favoritos</p>

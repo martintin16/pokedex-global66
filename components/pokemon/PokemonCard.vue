@@ -7,7 +7,7 @@ const props = defineProps<{
 
 defineEmits<{ toggleFavorite: [] }>();
 
-const { classes, icon } = usePokemonType();
+const { classes } = usePokemonType();
 const typesStore = useTypesStore();
 const { el, detail } = useLazyPokemonDetail(props.name);
 
@@ -36,7 +36,6 @@ watchEffect(() => {
         </p>
         <h3 class="text-xl font-semibold capitalize text-ink">{{ name }}</h3>
 
-        <!-- Skeleton, revisar si cambio por pokeball -->
         <div v-if="!detail" class="mt-2 flex gap-2">
           <span class="h-6 w-16 animate-pulse rounded-pill bg-gray-200" />
           <span class="h-6 w-16 animate-pulse rounded-pill bg-gray-200" />

@@ -33,11 +33,5 @@ const style = computed(() => {
 </script>
 
 <template>
-  <!-- Llena el contenedor que le pongas alrededor (vos controlás
-       tamaño/posición desde afuera, ej. un <div class="h-28 w-28"> en
-       la card, o un <div class="h-48 w-48"> en el hero del detalle).
-       Si el tipo todavía no tiene SVG exportado (shapeUrl null), no
-       rompe: no se ve nada acá, el contenido de al lado (el sprite)
-       sigue mostrándose igual. -->
   <div class="h-full w-full" :style="style" aria-hidden="true" />
 </template>

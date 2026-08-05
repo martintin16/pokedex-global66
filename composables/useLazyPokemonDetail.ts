@@ -1,4 +1,4 @@
-import type { Pokemon } from '~/types/pokemon'
+import type { Pokemon } from "~/types/pokemon";
 
 /**
  * PokeAPI no da tipo/imagen en el endpoint de lista, solo nombre + url.
@@ -10,32 +10,32 @@ import type { Pokemon } from '~/types/pokemon'
  * no se repite el llamado.
  */
 export function useLazyPokemonDetail(name: string) {
-  const store = usePokemonStore()
-  const el = ref<HTMLElement | null>(null)
-  const detail = ref<Pokemon | null>(store.detailCache[name] ?? null)
-  const loading = ref(false)
+  const store = usePokemonStore();
+  const el = ref<HTMLElement | null>(null);
+  const detail = ref<Pokemon | null>(store.detailCache[name] ?? null);
+  const loading = ref(false);
 
-  let observer: IntersectionObserver | null = null
+  let observer: IntersectionObserver | null = null;
 
   onMounted(() => {
-    if (detail.value || !el.value) return
+    if (detail.value || !el.value) return;
     observer = new IntersectionObserver(
       async ([entry]) => {
-        if (!entry.isIntersecting || loading.value || detail.value) return
-        loading.value = true
+        if (!entry.isIntersecting || loading.value || detail.value) return;
+        loading.value = true;
         try {
-          detail.value = await store.getDetail(name)
+          detail.value = await store.getDetail(name);
         } finally {
-          loading.value = false
-          observer?.disconnect()
+          loading.value = false;
+          observer?.disconnect();
         }
       },
-      { rootMargin: '200px' } // precarga un poco antes de que sea 100% visible
-    )
-    observer.observe(el.value)
-  })
+      { rootMargin: "200px" },
+    );
+    observer.observe(el.value);
+  });
 
-  onUnmounted(() => observer?.disconnect())
+  onUnmounted(() => observer?.disconnect());
 
-  return { el, detail, loading }
+  return { el, detail, loading };
 }

@@ -2,8 +2,8 @@ export interface NavItem {
   label: string;
   to: string;
   type: "image" | "icon";
-  src?: string; // solo si type === 'image'
-  icon?: string; // solo si type === 'icon'
+  src?: string;
+  icon?: string;
 }
 
 export const NAV_ITEMS: NavItem[] = [

@@ -1,27 +1,47 @@
 <script setup lang="ts">
-import type { Pokemon } from "~/types/pokemon";
+import type { Pokemon, PokemonSpecies } from "~/types/pokemon";
 
-const props = defineProps<{ pokemon: Pokemon }>();
+const props = defineProps<{
+  pokemon: Pokemon;
+  species?: PokemonSpecies | null;
+  weaknesses?: string[];
+}>();
 const typesStore = useTypesStore();
 const abilitiesStore = useAbilitiesStore();
 const copied = ref(false);
 
-// Revisar boton compartir
 async function share() {
-  const [typeLabels, abilityLabels] = await Promise.all([
+  const [typeLabels, abilityLabels, weaknessLabels] = await Promise.all([
     Promise.all(props.pokemon.types.map((slug) => typesStore.ensure(slug))),
     Promise.all(
       props.pokemon.abilities.map((a) => abilitiesStore.ensure(a.slug)),
     ),
+    Promise.all(
+      (props.weaknesses ?? []).map((slug) => typesStore.ensure(slug)),
+    ),
   ]);
 
+  const displayName =
+    props.pokemon.name.charAt(0).toUpperCase() + props.pokemon.name.slice(1);
+
+  const abilityTexts = abilityLabels.map((a, i) => {
+    const isHidden = props.pokemon.abilities[i]?.isHidden;
+    return isHidden ? `${a.label} (oculta)` : a.label;
+  });
+
   const parts = [
-    props.pokemon.name,
-    ...typeLabels.map((t) => t.label),
-    `${props.pokemon.weightKg} kg`,
-    `${props.pokemon.heightM} m`,
-    ...abilityLabels.map((a) => a.label),
-  ];
+    `Nombre: ${displayName}`,
+    `Nro pokédex: ${String(props.pokemon.id).padStart(3, "0")}`,
+    `Tipo: ${typeLabels.map((t) => t.label).join(", ")}`,
+    `Peso: ${props.pokemon.weightKg} kg`,
+    `Altura: ${props.pokemon.heightM} m`,
+    props.species?.genus ? `Categoría: ${props.species.genus}` : null,
+    `Habilidades: ${abilityTexts.join(", ")}`,
+    weaknessLabels.length
+      ? `Debilidades: ${weaknessLabels.map((t) => t.label).join(", ")}`
+      : null,
+  ].filter((part): part is string => Boolean(part));
+
   await navigator.clipboard.writeText(parts.join(", "));
   copied.value = true;
   setTimeout(() => (copied.value = false), 2000);

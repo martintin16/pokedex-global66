@@ -10,8 +10,6 @@ watch(
   (isOpen) => {
     if (isOpen) {
       draft.value = [...props.selected];
-      // Trae los 18 tipos con su label real (vía API) recién cuando
-      // hace falta mostrarlos, no en cada carga de la app.
       typesStore.ensureAll();
     }
   },
@@ -28,10 +26,12 @@ function toggle(slug: string) {
   <Teleport to="body">
     <div
       v-if="open"
-      class="fixed inset-0 z-30 flex items-end bg-black/40"
+      class="fixed inset-0 z-30 flex items-end justify-center bg-black/40 md:items-center"
       @click.self="emit('close')"
     >
-      <div class="w-full rounded-t-2xl bg-surface p-6">
+      <div
+        class="w-full rounded-t-2xl bg-surface p-6 md:max-w-md md:rounded-2xl"
+      >
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-bold text-ink">
             Filtra por tus preferencias

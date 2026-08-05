@@ -23,9 +23,6 @@ const { data: species, pending: speciesPending } = await useAsyncData(
   () => pokemonStore.getSpecies(name),
 );
 
-// Resuelve el detalle de CADA tipo del pokémon (label + relaciones de
-// daño). Se necesita completo (no solo el label) para calcular
-// debilidades reales, no una unión ingenua.
 const typeRecords = ref<PokemonType[]>([]);
 watchEffect(async () => {
   if (!pokemon.value) return;
@@ -41,8 +38,6 @@ const heroClasses = computed(() =>
   primaryType.value ? classes(primaryType.value) : { soft: "bg-gray-100" },
 );
 
-// Género: gender_rate es -1 (sin género) o un entero de 0 a 8 = octavos
-// de probabilidad de ser hembra.
 const genderPercents = computed(() => {
   const rate = species.value?.genderRate;
   if (rate === undefined || rate === -1) return null;
@@ -88,7 +83,11 @@ const genderPercents = computed(() => {
               class="h-6 w-6 text-white"
           /></NuxtLink>
           <div class="flex items-center gap-2">
-            <ShareButton :pokemon="pokemon" />
+            <ShareButton
+              :pokemon="pokemon"
+              :species="species"
+              :weaknesses="weaknessSlugs"
+            />
             <button
               :aria-label="
                 favoritesStore.isFavorite(name)

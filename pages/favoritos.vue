@@ -2,12 +2,6 @@
 const favoritesStore = useFavoritesStore();
 const pokemonStore = usePokemonStore();
 
-// El store se hidrata desde localStorage durante el setup() del
-// componente, PERO Vue ya arranca a renderizar con lo que haya en ese
-// instante. Para no arriesgarnos a mostrar "sin favoritos" por una
-// fracción de segundo antes de que ese valor asiente, esperamos a
-// onMounted (que corre después de que el setup ya terminó del todo)
-// antes de decidir qué mostrar. Mientras tanto, loader genérico.
 const ready = ref(false);
 onMounted(() => {
   ready.value = true;
@@ -38,7 +32,6 @@ function clearFilter() {
   activeTypes.value = [];
 }
 
-// Revisar swipe de eliminado
 const swipeOpenFor = ref<string | null>(null);
 
 const touchStartX = ref(0);
@@ -127,11 +120,15 @@ function remove(name: string) {
               />
             </div>
             <button
-              class="flex w-[72px] shrink-0 items-center justify-center bg-red-500 text-white"
+              class="flex w-[72px] shrink-0 items-center justify-center rounded-r-card bg-trash text-white"
               aria-label="Eliminar de favoritos"
               @click="remove(favName)"
             >
-              🗑
+              <Icon
+                name="material-symbols:delete-outline-rounded"
+                class="h-6 w-6"
+                aria-hidden="true"
+              />
             </button>
           </div>
         </div>

@@ -19,7 +19,7 @@ const route = useRoute();
       <span class="text-lg font-bold text-ink">Pokédex</span>
     </div>
 
-    <nav class="flex flex-col gap-1">
+    <nav class="flex flex-col gap-4">
       <NuxtLink
         v-for="item in NAV_ITEMS"
         :key="item.to"

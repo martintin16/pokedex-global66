@@ -22,6 +22,7 @@ export default <Partial<Config>>{
         surface: "#FFFFFF",
         app: "#F5F5F7", // fondo general de la app
         favorite: "#75757599",
+        trash: "#CD3131",
 
         // Colores por tipo de Pokémon: badge (pill) + fondo de card.
         type: TYPE_COLORS,
